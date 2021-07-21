@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
-from .managers import UserManager
+from users.managers import UserManager, ActiveUserManager
 
 
 class User(AbstractBaseUser):
@@ -15,6 +15,7 @@ class User(AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
+    active = ActiveUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']

@@ -2,6 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.UserList.as_view(), name='user-list'),
-    path('<int:pk>/', views.UserDetail.as_view(), name='user-detail')
+    path('profile/<int:pk>/', views.UserProfileView.as_view(), name='user-profile'),
+    path('profile/<int:pk>/update/', views.UserProfileUpdateView.as_view(), name='user-profile-update'),
 ]

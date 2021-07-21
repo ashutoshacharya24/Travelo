@@ -1,13 +1,16 @@
-from rest_framework import generics
-from .models import User
-from .serializers import UserSerializer
+from rest_framework.generics import RetrieveAPIView, UpdateAPIView
+from rest_framework import permissions
+from users.models import User
+from users.serializers import ProfileSerializer
+from users.permissions import IsOwner
 
 
-class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class UserProfileView(RetrieveAPIView):
+    queryset = User.active.all()
+    serializer_class = ProfileSerializer
 
 
-class UserDetail(generics.RetrieveDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class UserProfileUpdateView(UpdateAPIView):
+    queryset = User.active.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
