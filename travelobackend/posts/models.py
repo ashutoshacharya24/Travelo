@@ -9,6 +9,7 @@ class Post(models.Model):
     location = models.JSONField(blank=True, null=True)
     is_public = models.BooleanField(default=True)
     is_favourite = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     tags = models.ManyToManyField(Tag, blank=True)
 
@@ -20,7 +21,7 @@ class Post(models.Model):
 
 
 class PostPhoto(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_photos')
     photo_url = models.URLField()
 
     def __str__(self) -> str:
