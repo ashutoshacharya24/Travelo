@@ -31,6 +31,7 @@ class PostList(APIView):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             post = serializer.save(user=request.user)
+            post.save()
             if 'tags' in request.data:
                 tags = request.data['tags']
                 self.add_tags(post, tags)

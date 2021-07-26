@@ -3,5 +3,6 @@ from rest_framework import views
 from . import views
 
 urlpatterns = [
-    path('', views.PostList.as_view(), name='post-list')
+    path('', views.PostList.as_view(), name='post-list'),
+    # path('like/')
 ]

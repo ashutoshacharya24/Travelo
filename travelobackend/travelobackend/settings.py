@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^laay$vqol@80r5&o9xcq5t)5xde$e2o(*$b@72p((y3eh+^4)'
+SECRET_KEY = 'django-insecure-upq&f!+r%2$1js0#2ytv5&8l-4c)&6ikl!7vt-a--ussi##co2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,16 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Rest Framework
+    # Rest framework
     'rest_framework',
-    'rest_framework_swagger',
 
-    # Additional Apps
-    'users.apps.UsersConfig',
-    'tags.apps.TagsConfig',
-    'posts.apps.PostsConfig',
-    'comments.apps.CommentsConfig',
-    'likes.apps.LikesConfig',
+    # Custom Apps
+    'comments',
+    'likes',
+    'posts',
+    'tags',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +64,7 @@ ROOT_URLCONF = 'travelobackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,11 +134,3 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
-
-# REST_FRAMEWORK = {
-#     # Use Django's standard `django.contrib.auth` permissions,
-#     # or allow read-only access for unauthenticated users.
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#     ]
-# }

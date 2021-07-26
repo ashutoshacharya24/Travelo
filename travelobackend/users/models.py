@@ -1,14 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+import uuid
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, AbstractUser
 from users.managers import UserManager, ActiveUserManager
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
-    avatar_url = models.URLField(blank=True, null=True)
+    username_validator = UnicodeUsernameValidator()
 
-    is_active = models.BooleanField(default=True)
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+    username = models.CharField('username', max_length=50, unique=True, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', validators=[username_validator])
+    email = models.EmailField('email address', max_length=255, unique=True)
+    name = models.CharField('name', max_length=100)
+    avatar_url = models.URLField('avatar', blank=True, null=True)
+
+    is_active = models.BooleanField('active', default=True)
     is_admin = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -17,8 +23,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     active = ActiveUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'name']
 
     def __str__(self):
         return self.email

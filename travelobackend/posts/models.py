@@ -1,9 +1,11 @@
 from django.db import models
 from users.models import User
 from tags.models import Tag
+import uuid
 
 
 class Post(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts')
     caption = models.CharField(max_length=100)
     location = models.JSONField(blank=True, null=True)
@@ -21,6 +23,7 @@ class Post(models.Model):
 
 
 class PostPhoto(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_photos')
     photo_url = models.URLField()
 
