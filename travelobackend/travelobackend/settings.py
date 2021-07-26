@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Custom Apps
+    'authentication',
+    'users',
+    'home',
     'comments',
     'likes',
     'posts',
     'tags',
-    'users',
 ]
 
 MIDDLEWARE = [
